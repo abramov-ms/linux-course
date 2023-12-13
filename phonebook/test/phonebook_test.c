@@ -5,9 +5,12 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "phonebook.h"
+#include <phonebook/phonebook.h>
+#include <uapi/asm-generic/unistd.h>
 
-int main() {
+void test_chrdev() {
+    printf("testing /dev/phonebook\n");
+
     int phonebook = open("/dev/phonebook", O_RDWR);
     if (phonebook == -1) {
         err(EXIT_FAILURE, "open");
@@ -34,9 +37,19 @@ int main() {
 
     if (memcmp(&request.payload, &user, sizeof(struct phonebook_user)) != 0) {
         fprintf(stderr, "got different response");
-        return 1;
+        exit(1);
     }
 
-    printf("All good!\n");
+    printf("all good\n");
+}
+
+void test_syscalls() {
+    syscall(__NR_pb_get_user);
+    syscall(__NR_pb_add_user);
+    syscall(__NR_pb_del_user);
+}
+
+int main() {
+    test_syscalls();
     return 0;
 }

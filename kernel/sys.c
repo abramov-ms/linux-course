@@ -2842,6 +2842,13 @@ SYSCALL_DEFINE1(sysinfo, struct sysinfo __user *, info)
 	return 0;
 }
 
+SYSCALL_DEFINE1(pb_get_user, const char __user *, last_name,
+				struct phonebook_user __user *, user)
+{
+	printk("Phonebook get user");
+	return 0;
+}
+
 #ifdef CONFIG_COMPAT
 struct compat_sysinfo {
 	s32 uptime;

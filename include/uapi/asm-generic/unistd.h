@@ -711,6 +711,9 @@ __SYSCALL(__NR_kexec_file_load,     sys_kexec_file_load)
 
 /* 295 through 402 are unassigned to sync up with generic numbers, don't use */
 
+#define __NR_pb_get_user 666
+__SYSCALL(__NR_pb_get_user, sys_pb_get_user)
+
 #if defined(__SYSCALL_COMPAT) || __BITS_PER_LONG == 32
 #define __NR_clock_gettime64 403
 __SYSCALL(__NR_clock_gettime64, sys_clock_gettime)
@@ -830,7 +833,7 @@ __SYSCALL(__NR_futex_wait, sys_futex_wait)
 __SYSCALL(__NR_futex_requeue, sys_futex_requeue)
 
 #undef __NR_syscalls
-#define __NR_syscalls 457
+#define __NR_syscalls 458
 
 /*
  * 32 bit systems traditionally used different
