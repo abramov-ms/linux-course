@@ -425,3 +425,5 @@
 # not special and are not to be used for x32-specific syscalls.
 
 666 common pb_get_user sys_pb_get_user
+667 common pb_add_user sys_pb_add_user
+668 common pb_del_user sys_pb_del_user

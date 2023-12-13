@@ -337,6 +337,8 @@ COND_SYSCALL(utimensat_time32);
 COND_SYSCALL(clock_adjtime32);
 
 COND_SYSCALL(pb_get_user);
+COND_SYSCALL(pb_add_user);
+COND_SYSCALL(pb_del_user);
 
 /*
  * The syscalls below are not found in include/uapi/asm-generic/unistd.h

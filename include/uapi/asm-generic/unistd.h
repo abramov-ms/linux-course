@@ -713,6 +713,10 @@ __SYSCALL(__NR_kexec_file_load,     sys_kexec_file_load)
 
 #define __NR_pb_get_user 666
 __SYSCALL(__NR_pb_get_user, sys_pb_get_user)
+#define __NR_pb_add_user 667
+__SYSCALL(__NR_pb_add_user, sys_pb_add_user)
+#define __NR_pb_del_user 668
+__SYSCALL(__NR_pb_del_user, sys_pb_del_user)
 
 #if defined(__SYSCALL_COMPAT) || __BITS_PER_LONG == 32
 #define __NR_clock_gettime64 403
@@ -833,7 +837,7 @@ __SYSCALL(__NR_futex_wait, sys_futex_wait)
 __SYSCALL(__NR_futex_requeue, sys_futex_requeue)
 
 #undef __NR_syscalls
-#define __NR_syscalls 458
+#define __NR_syscalls 460
 
 /*
  * 32 bit systems traditionally used different

@@ -1065,6 +1065,8 @@ asmlinkage long sys_fork(void);
 
 asmlinkage long sys_pb_get_user(const char __user *last_name,
 				struct phonebook_user __user *user);
+asmlinkage long sys_pb_add_user(const struct phonebook_user __user *user);
+asmlinkage long sys_pb_del_user(const char __user *last_name);
 
 /* obsolete */
 asmlinkage long sys_stime(__kernel_old_time_t __user *tptr);

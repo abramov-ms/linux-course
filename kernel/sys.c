@@ -2842,10 +2842,22 @@ SYSCALL_DEFINE1(sysinfo, struct sysinfo __user *, info)
 	return 0;
 }
 
-SYSCALL_DEFINE1(pb_get_user, const char __user *, last_name,
+SYSCALL_DEFINE2(pb_get_user, const char __user *, last_name,
 				struct phonebook_user __user *, user)
 {
 	printk("Phonebook get user");
+	return 0;
+}
+
+SYSCALL_DEFINE1(pb_add_user, const struct phonebook_user __user *, user)
+{
+	printk("Phonebook add user");
+	return 0;
+}
+
+SYSCALL_DEFINE1(pb_del_user, const char __user *, last_name)
+{
+	printk("Phonebook del user");
 	return 0;
 }
 
