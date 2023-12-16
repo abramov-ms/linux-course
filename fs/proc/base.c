@@ -3240,6 +3240,13 @@ static int proc_stack_depth(struct seq_file *m, struct pid_namespace *ns,
 }
 #endif /* CONFIG_STACKLEAK_METRICS */
 
+static int proc_times_scheduled(struct seq_file* m, struct pid_namespace *ns,
+								struct pid *pid, struct task_struct *task)
+{
+	seq_printf(m, "%lld", task->times_scheduled);
+	return 0;
+}
+
 /*
  * Thread groups
  */
@@ -3360,6 +3367,7 @@ static const struct pid_entry tgid_base_stuff[] = {
 	ONE("ksm_merging_pages",  S_IRUSR, proc_pid_ksm_merging_pages),
 	ONE("ksm_stat",  S_IRUSR, proc_pid_ksm_stat),
 #endif
+	ONE("times_scheduled", S_IRUSR, proc_times_scheduled),
 };
 
 static int proc_tgid_base_readdir(struct file *file, struct dir_context *ctx)
