@@ -247,6 +247,7 @@ static inline void sched_info_enqueue(struct rq *rq, struct task_struct *t)
 {
 	if (!t->sched_info.last_queued)
 		t->sched_info.last_queued = rq_clock(rq);
+	t->times_scheduled++;
 }
 
 /*
