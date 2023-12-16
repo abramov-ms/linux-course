@@ -1,3 +1,6 @@
+#ifndef PHONEBOOK_PHONEBOOK_H
+#define PHONEBOOK_PHONEBOOK_H
+
 #define PHONEBOOK_NAME_MAX 64
 
 struct phonebook_user {
@@ -17,3 +20,5 @@ struct phonebook_request {
     enum phonebook_opcode opcode;
     struct phonebook_user payload;
 };
+
+#endif // PHONEBOOK_PHONEBOOK_H
