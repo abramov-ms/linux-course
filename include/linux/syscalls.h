@@ -74,6 +74,7 @@ struct landlock_ruleset_attr;
 enum landlock_rule_type;
 struct cachestat_range;
 struct cachestat;
+struct phonebook_user;
 
 #include <linux/types.h>
 #include <linux/aio_abi.h>
@@ -1061,6 +1062,11 @@ asmlinkage long sys_uselib(const char __user *library);
 asmlinkage long sys_sysfs(int option,
 				unsigned long arg1, unsigned long arg2);
 asmlinkage long sys_fork(void);
+
+asmlinkage long sys_pb_get_user(const char __user *last_name, size_t len,
+				struct phonebook_user __user *user);
+asmlinkage long sys_pb_add_user(const struct phonebook_user __user *user);
+asmlinkage long sys_pb_del_user(const char __user *last_name, size_t len);
 
 /* obsolete */
 asmlinkage long sys_stime(__kernel_old_time_t __user *tptr);
