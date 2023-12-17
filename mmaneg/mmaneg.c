@@ -17,8 +17,20 @@ static void listvma(void)
 	vma_iter_init(&vmi, current->mm, 0);
 	struct vm_area_struct *vma;
 	while ((vma = vma_next(&vmi))) {
-		printk(KERN_INFO "[vma] [%lu, %lu)", vma->vm_start,
-		       vma->vm_end);
+		char flags[5];
+		flags[0] = (vma->vm_flags & VM_READ) ? 'r' : '-';
+		flags[1] = (vma->vm_flags & VM_WRITE) ? 'w' : '-';
+		flags[2] = (vma->vm_flags & VM_EXEC) ? 'x' : '-';
+		flags[3] = (vma->vm_flags & VM_SHARED) ? 's' : 'p';
+		flags[4] = '\0';
+		char pathbuf[1024] = { '\0' };
+		const char *path = pathbuf;
+		if (vma->vm_file) {
+			path = d_path(&vma->vm_file->f_path, pathbuf,
+				      sizeof(pathbuf));
+		}
+		printk(KERN_INFO "[vma] pid=%d %s [0x%lx, 0x%lx) %s",
+		       current->pid, flags, vma->vm_start, vma->vm_end, path);
 	}
 }
 
@@ -26,20 +38,24 @@ static void findpage(unsigned long addr)
 {
 	struct vm_area_struct *vma = find_vma(current->mm, addr);
 	if (!vma) {
-		printk(KERN_INFO "[vma] Could not translate %lu", addr);
+		printk(KERN_INFO "[vma] pid=%d Could not translate 0x%lx",
+		       current->pid, addr);
 		return;
 	}
 
-	printk(KERN_INFO "[vma] %lu -> %lu", addr, vma->vm_pgoff);
+	printk(KERN_INFO "[vma] pid=%d virt 0x%lx -> phys 0x%lx", current->pid,
+	       addr, vma->vm_pgoff);
 }
 
 static void writeval(unsigned long addr, unsigned char val)
 {
 	size_t errors = copy_to_user((void *)addr, &val, sizeof(val));
 	if (errors > 0) {
-		printk(KERN_INFO "[vma] Failed to copy %d into %lu", val, addr);
+		printk(KERN_INFO "[vma] pid=%d Failed to copy %d into 0x%lx",
+		       current->pid, val, addr);
 	} else {
-		printk(KERN_INFO "[vma] Copied %d into %lu", val, addr);
+		printk(KERN_INFO "[vma] pid=%d Copied %d into 0x%lx",
+		       current->pid, val, addr);
 	}
 }
 
