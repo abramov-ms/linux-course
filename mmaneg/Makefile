@@ -2,7 +2,7 @@ obj-m += mmaneg.o
 
 all: mmaneg
 
-phonebook:
+mmaneg:
 	make -C ../ M=$(PWD) modules
 
 clean:
