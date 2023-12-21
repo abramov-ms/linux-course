@@ -1,0 +1,16 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I",
+      "../../include",
+      "-o",
+      "mmaneg_test",
+      "mmaneg_test.c"
+    ],
+    "directory": "/home/dgdh/Documents/git/linux-course/mmaneg/test",
+    "file": "/home/dgdh/Documents/git/linux-course/mmaneg/test/mmaneg_test.c",
+    "output": "/home/dgdh/Documents/git/linux-course/mmaneg/test/mmaneg_test"
+  }
+]
